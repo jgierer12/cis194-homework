@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
 
--- CIS 194 Homework 2 - Exercises 1-3
+-- CIS 194 Homework 2 - Exercises 1-4
 
 module LogAnalysis where
 import Log
@@ -37,3 +37,9 @@ insert msg1@(LogMessage _ t1 _) (Node ltree msg2@(LogMessage _ t2 _) rtree)
 build :: [LogMessage] -> MessageTree
 build [] = Leaf
 build (msg:msgs) = insert msg (build msgs)
+
+-- Lists all `LogMessage`s in the `MessageTree` from left to right
+-- (in-order traversal)
+inOrder :: MessageTree -> [LogMessage]
+inOrder Leaf = []
+inOrder (Node ltree msg rtree) = inOrder ltree ++ [msg] ++ inOrder rtree
