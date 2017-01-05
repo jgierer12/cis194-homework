@@ -27,11 +27,11 @@ parse = map parseMessage . lines
 
 -- Insert a `LogMessage` into an existing `MessageTree`
 insert :: LogMessage -> MessageTree -> MessageTree
-insert (Unknown _) tree = tree
-insert msg Leaf = Node Leaf msg Leaf
+insert msg@(LogMessage _ _ _) Leaf = Node Leaf msg Leaf
 insert msg1@(LogMessage _ t1 _) (Node ltree msg2@(LogMessage _ t2 _) rtree)
    | t1 < t2 = Node (insert msg1 ltree) msg2 rtree
    | otherwise = Node ltree msg2 (insert msg1 rtree)
+insert _ tree = tree
 
 -- Creates a sorted `MessageTree` from a list of `LogMessage`s
 build :: [LogMessage] -> MessageTree
