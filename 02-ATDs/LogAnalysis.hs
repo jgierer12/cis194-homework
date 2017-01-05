@@ -25,6 +25,7 @@ parseMessage msg =
 parse :: String -> [LogMessage]
 parse = map parseMessage . lines
 
+-- Insert a `LogMessage` into an existing `MessageTree`
 insert :: LogMessage -> MessageTree -> MessageTree
 insert (Unknown _) tree = tree
 insert msg Leaf = Node Leaf msg Leaf
