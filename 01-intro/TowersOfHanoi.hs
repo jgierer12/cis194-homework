@@ -1,3 +1,5 @@
+-- CIS 194 Homework 1 - Exercises 5-6
+
 type Peg = String
 type Move = (Peg, Peg)
 

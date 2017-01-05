@@ -1,3 +1,5 @@
+-- CIS 194 Homework 1 - Exercises 1-4
+
 import Data.Char
 
 -- Converts a positive Integer to a list of its digits
