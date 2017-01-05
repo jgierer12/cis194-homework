@@ -17,3 +17,6 @@ cabal.sandbox.config
 *.eventlog
 .stack-work/
 cabal.project.local
+
+!02-ATDs/error.log
+!02-ATDs/sample.log
