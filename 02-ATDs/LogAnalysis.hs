@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
 
--- CIS 194 Homework 2 - Exercises 1-4
+-- CIS 194 Homework 2 - Exercises 1-5
 
 module LogAnalysis where
 import Log
@@ -43,3 +43,19 @@ build (msg:msgs) = insert msg (build msgs)
 inOrder :: MessageTree -> [LogMessage]
 inOrder Leaf = []
 inOrder (Node ltree msg rtree) = inOrder ltree ++ [msg] ++ inOrder rtree
+
+-- Lists all error messages with a severity of at least 50,
+-- sorted by timestamp
+whatWentWrong :: [LogMessage] -> [String]
+whatWentWrong = map messageContent . inOrder . build . filter isSevereError
+
+-- Check if a `LogMessage` is a severe error
+-- Severe errors have an error level of 50 or higher
+isSevereError :: LogMessage -> Bool
+isSevereError (LogMessage (Error l) _ _) = l >= 50
+isSevereError _ = False
+
+-- Extract the content of a `LogMessage`
+messageContent :: LogMessage -> String
+messageContent (LogMessage _ _ c) = c
+messageContent _ = ""
